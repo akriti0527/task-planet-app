@@ -2,6 +2,16 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 require("dotenv").config();
+const path = require("path");
+
+// __dirname already exists in CommonJS
+app.use(express.static(path.join(__dirname, "frontend/project/dist")));
+
+app.get("*", (req, res) => {
+  res.sendFile(
+    path.join(__dirname, "frontend/project/dist/index.html")
+  );
+});
 
 const app = express();
 app.use(cors());
